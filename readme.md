@@ -1,4 +1,4 @@
-# tgrpc 🚀
+# tygrpc 🚀
 
 **TypeScript-first gRPC Framework**  
 Automatically generate gRPC services from TypeScript classes.  
@@ -19,7 +19,7 @@ Built for efficiency, type safety, and developer happiness.
 ## Installation 📦
 
 ```bash
-npm install tgrpc @grpc/grpc-js reflect-metadata
+npm install tygrpc @grpc/grpc-js reflect-metadata
 ```
 
 ---
@@ -29,11 +29,11 @@ npm install tgrpc @grpc/grpc-js reflect-metadata
 ### 1. Define a Service
 ```typescript
 // user.service.ts
-import { tgrpc } from 'tgrpc';
+import { tygrpc } from 'tygrpc';
 
-@tgrpc.Service({ name: 'UserService' })
+@tygrpc.Service({ name: 'UserService' })
 export class UserService {
-  @tgrpc.Method()
+  @tygrpc.Method()
   async getUser(req: { id: string }) {
     return { id: req.id, name: 'Alice' };
   }
@@ -43,10 +43,10 @@ export class UserService {
 ### 2. Start the Server
 ```typescript
 // server.ts
-import { createTGRpcServer } from 'tgrpc';
+import { createTygrpcServer } from 'tgrpc';
 import { UserService } from './user.service';
 
-const server = createTGRpcServer();
+const server = createTygrpcServer();
 server.addService(UserService);
 server.start(50051);
 ```
@@ -69,14 +69,14 @@ client.getUser({ id: '123' }, (err, response) => {
 
 ---
 
-## Why tgrpc? 🤔
+## Why tygrpc? 🤔
 
-| Feature               | tgrpc                | gRPC                 | tRPC                |
-|-----------------------|----------------------|----------------------|---------------------|
-| TypeScript Native     | ✅                   | ❌                   | ✅                  |
-| .proto Files          | Auto-generated       | Manual               | Not used           |
-| Transport             | HTTP/2 (gRPC)        | HTTP/2 (gRPC)        | HTTP/1.1           |
-| Type Safety           | End-to-End           | Partial              | Full                |
+| Feature               | tygrpc         | gRPC                 | tRPC                |
+|-----------------------|----------------|----------------------|---------------------|
+| TypeScript Native     | ✅              | ❌                   | ✅                  |
+| .proto Files          | Auto-generated | Manual               | Not used           |
+| Transport             | HTTP/2 (gRPC)  | HTTP/2 (gRPC)        | HTTP/1.1           |
+| Type Safety           | End-to-End     | Partial              | Full                |
 
 ---
 
@@ -84,9 +84,9 @@ client.getUser({ id: '123' }, (err, response) => {
 
 ### Custom Method Names
 ```typescript
-@tgrpc.Service({ name: 'Calculator' })
+@tygrpc.Service({ name: 'Calculator' })
 class CalculatorService {
-  @tgrpc.Method({ name: 'AddNumbers' })
+  @tygrpc.Method({ name: 'AddNumbers' })
   add(a: number, b: number) {
     return a + b;
   }
@@ -95,7 +95,7 @@ class CalculatorService {
 
 ### Error Handling
 ```typescript
-@tgrpc.Method()
+@tygrpc.Method()
 async deleteUser(req: { id: string }) {
   if (!req.id) throw new Error('ID is required');
   // ...
@@ -107,7 +107,7 @@ async deleteUser(req: { id: string }) {
 ## Project Structure 🗂️
 
 ```
-tgrpc/
+tygrpc/
 ├── src/
 │   ├── core/            # Domain logic
 │   ├── infrastructure/  # gRPC/proto implementations
